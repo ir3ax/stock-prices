@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { fetchStocksDataByMins } from '../../../services/api';
 import ReactApexChart from 'react-apexcharts';
 import { candleStickOptions } from '../../../utils/constant';
+import { useAtom } from 'jotai';
+import { stockPrice } from '../../../atom/stockPriceAtom';
 
 interface StocksData {
   symbol: string;
@@ -33,6 +35,7 @@ interface TimeIntervalData {
 
 const LiveChartsDay = (props: StocksData) => {
   const [stockData, setStockData] = useState<TimeIntervalData | null>(null);
+  const [stockPriceAtom] = useAtom(stockPrice);
 
   useEffect(() => {
     fetchStocksDataByMins(props.symbol, props.interval).then(data =>
@@ -60,6 +63,10 @@ const LiveChartsDay = (props: StocksData) => {
   return (
     <div>
       <div id='chart'>
+      <div className='flex flex-col gap-2 pb-4'>
+        <p className='font-semibold text-3xl tracking-wide ml-1'>{props.symbol}</p>
+        <p className='font-bold text-4xl tracking-wide text-[#239c5e]'>{stockPriceAtom}</p>
+      </div>
         <ReactApexChart
           options={candleStickOptions}
           series={[{ name: 'candle', data: seriesData }]}

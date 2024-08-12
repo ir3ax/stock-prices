@@ -6,13 +6,6 @@ export const candleStickOptions: ApexOptions = {
     type: 'candlestick',
     background: '#142539', 
   },
-  title: {
-    text: 'CandleStick Chart',
-    align: 'left',
-    style:{
-      color: '#ffffff'
-    }
-  },
   annotations: {
     xaxis: [
       {

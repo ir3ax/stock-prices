@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchStocksDataByQuotesEnd } from "../../services/api";
+import { useAtom } from "jotai";
+import { stockPrice } from "../../atom/stockPriceAtom";
 
 interface StocksData {
     symbol: string;
@@ -24,14 +26,16 @@ interface StockQuote {
   
 const StockDetails = (props: StocksData) => {
     const [stockDataByQuoteEnds, setStockDataByQuoteEnds] = useState<StockQuote | null>(null);
+    const [, setStockPriceAtom]  = useAtom(stockPrice);
+
 
     useEffect(() => {
-        fetchStocksDataByQuotesEnd(props.symbol).then(data =>
-            setStockDataByQuoteEnds(data)
-        );
+        fetchStocksDataByQuotesEnd(props.symbol).then(data => {
+            setStockDataByQuoteEnds(data);
+            setStockPriceAtom(data["Global Quote"]["05. price"]);
+        });
     }, [props.symbol]);
 
-    console.log("stockDataByQuoteEnds",stockDataByQuoteEnds?.["Global Quote"]["01. symbol"])
       
   return (
     <div id='details' className='w-full'>
