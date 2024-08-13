@@ -31,6 +31,7 @@ const Header = () => {
                 setIsError(matches.length === 0);
             });
         } else {
+            setSearchValueAtom('IBM')
             setSearchResults([]);
             setDropdownVisible(false);
             setIsError(false);
@@ -50,7 +51,7 @@ const Header = () => {
 
     return (
         <div className='w-full flex flex-col'>
-            <h1 className='text-4xl font-bold mb-6'>
+            <h1 className='text-4xl font-semibold mb-6 tracking-wide'>
                 Stock Market
             </h1>
             <div className='relative w-full max-w-lg'>

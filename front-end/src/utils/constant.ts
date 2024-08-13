@@ -31,7 +31,7 @@ export const candleStickOptions: ApexOptions = {
     type: 'datetime',
     labels: {
       formatter: function (val: string | number | Date | dayjs.Dayjs | null | undefined) {
-        return dayjs(val).format('MMM DD HH:mm');
+        return dayjs(val).format('YYYY MMM DD HH:mm');
       },
       style: {
         fontSize: '12px',
